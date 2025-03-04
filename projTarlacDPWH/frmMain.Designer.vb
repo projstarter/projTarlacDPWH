@@ -26,11 +26,21 @@ Partial Class frmMain
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
         Dim DataGridViewCellStyle1 As DataGridViewCellStyle = New DataGridViewCellStyle()
         MenuStrip1 = New MenuStrip()
+        ProgramToolStripMenuItem1 = New ToolStripMenuItem()
+        NewEntryToolStripMenuItem = New ToolStripMenuItem()
+        ToolStripSeparator3 = New ToolStripSeparator()
+        ToolStripMenuItem1 = New ToolStripMenuItem()
+        ToolStripSeparator4 = New ToolStripSeparator()
+        DeleteToolStripMenuItem = New ToolStripMenuItem()
+        ToolStripSeparator5 = New ToolStripSeparator()
         InfoToolStripMenuItem = New ToolStripMenuItem()
         ProgramToolStripMenuItem = New ToolStripMenuItem()
         ToolStripSeparator1 = New ToolStripSeparator()
         UserAccountsToolStripMenuItem = New ToolStripMenuItem()
+        ToolStripSeparator6 = New ToolStripSeparator()
         PermittedWeightPerAxleToolStripMenuItem = New ToolStripMenuItem()
+        SerialNumberToolStripMenuItem = New ToolStripMenuItem()
+        CalibrationNumberToolStripMenuItem = New ToolStripMenuItem()
         StatusStrip1 = New StatusStrip()
         lblUser = New ToolStripStatusLabel()
         lblPortStatus = New ToolStripStatusLabel()
@@ -75,6 +85,7 @@ Partial Class frmMain
         btntoggle = New Button()
         lbldisplaymode = New Label()
         Panel10 = New Panel()
+        chkenableSaveandPrint = New CheckBox()
         Button2 = New Button()
         btnsaveandprint = New Button()
         btnprint = New Button()
@@ -99,6 +110,7 @@ Partial Class frmMain
         lblreading = New Label()
         Timer1 = New Timer(components)
         SIMULATION = New Timer(components)
+        ExitToolStripMenuItem = New ToolStripMenuItem()
         MenuStrip1.SuspendLayout()
         StatusStrip1.SuspendLayout()
         Panel1.SuspendLayout()
@@ -120,56 +132,123 @@ Partial Class frmMain
         ' 
         ' MenuStrip1
         ' 
-        MenuStrip1.Font = New Font("Tahoma", 9F)
+        MenuStrip1.Font = New Font("Tahoma", 9.0F)
         MenuStrip1.ImageScalingSize = New Size(24, 24)
-        MenuStrip1.Items.AddRange(New ToolStripItem() {InfoToolStripMenuItem})
+        MenuStrip1.Items.AddRange(New ToolStripItem() {ProgramToolStripMenuItem1, InfoToolStripMenuItem})
         MenuStrip1.Location = New Point(0, 0)
         MenuStrip1.Name = "MenuStrip1"
-        MenuStrip1.Size = New Size(1851, 30)
+        MenuStrip1.Padding = New Padding(4, 1, 0, 1)
+        MenuStrip1.Size = New Size(1296, 24)
         MenuStrip1.TabIndex = 0
         MenuStrip1.Text = "MenuStrip1"
         ' 
+        ' ProgramToolStripMenuItem1
+        ' 
+        ProgramToolStripMenuItem1.DropDownItems.AddRange(New ToolStripItem() {NewEntryToolStripMenuItem, ToolStripSeparator3, ToolStripMenuItem1, ToolStripSeparator4, DeleteToolStripMenuItem, ToolStripSeparator5, ExitToolStripMenuItem})
+        ProgramToolStripMenuItem1.Name = "ProgramToolStripMenuItem1"
+        ProgramToolStripMenuItem1.Size = New Size(78, 22)
+        ProgramToolStripMenuItem1.Text = "Hot Key(s)"
+        ' 
+        ' NewEntryToolStripMenuItem
+        ' 
+        NewEntryToolStripMenuItem.Image = CType(resources.GetObject("NewEntryToolStripMenuItem.Image"), Image)
+        NewEntryToolStripMenuItem.Name = "NewEntryToolStripMenuItem"
+        NewEntryToolStripMenuItem.ShortcutKeys = Keys.F3
+        NewEntryToolStripMenuItem.Size = New Size(188, 30)
+        NewEntryToolStripMenuItem.Text = "New Entry"
+        ' 
+        ' ToolStripSeparator3
+        ' 
+        ToolStripSeparator3.Name = "ToolStripSeparator3"
+        ToolStripSeparator3.Size = New Size(185, 6)
+        ' 
+        ' ToolStripMenuItem1
+        ' 
+        ToolStripMenuItem1.Image = CType(resources.GetObject("ToolStripMenuItem1.Image"), Image)
+        ToolStripMenuItem1.Name = "ToolStripMenuItem1"
+        ToolStripMenuItem1.ShortcutKeys = Keys.F5
+        ToolStripMenuItem1.Size = New Size(188, 30)
+        ToolStripMenuItem1.Text = "Refresh"
+        ' 
+        ' ToolStripSeparator4
+        ' 
+        ToolStripSeparator4.Name = "ToolStripSeparator4"
+        ToolStripSeparator4.Size = New Size(185, 6)
+        ' 
+        ' DeleteToolStripMenuItem
+        ' 
+        DeleteToolStripMenuItem.Image = CType(resources.GetObject("DeleteToolStripMenuItem.Image"), Image)
+        DeleteToolStripMenuItem.Name = "DeleteToolStripMenuItem"
+        DeleteToolStripMenuItem.ShortcutKeys = Keys.Delete
+        DeleteToolStripMenuItem.Size = New Size(188, 30)
+        DeleteToolStripMenuItem.Text = "Delete"
+        ' 
+        ' ToolStripSeparator5
+        ' 
+        ToolStripSeparator5.Name = "ToolStripSeparator5"
+        ToolStripSeparator5.Size = New Size(185, 6)
+        ' 
         ' InfoToolStripMenuItem
         ' 
-        InfoToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {ProgramToolStripMenuItem, ToolStripSeparator1, UserAccountsToolStripMenuItem, PermittedWeightPerAxleToolStripMenuItem})
+        InfoToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {ProgramToolStripMenuItem, ToolStripSeparator1, UserAccountsToolStripMenuItem, ToolStripSeparator6, PermittedWeightPerAxleToolStripMenuItem, SerialNumberToolStripMenuItem, CalibrationNumberToolStripMenuItem})
         InfoToolStripMenuItem.Name = "InfoToolStripMenuItem"
-        InfoToolStripMenuItem.Size = New Size(83, 26)
+        InfoToolStripMenuItem.Size = New Size(59, 22)
         InfoToolStripMenuItem.Text = "System"
         ' 
         ' ProgramToolStripMenuItem
         ' 
         ProgramToolStripMenuItem.Image = CType(resources.GetObject("ProgramToolStripMenuItem.Image"), Image)
         ProgramToolStripMenuItem.Name = "ProgramToolStripMenuItem"
-        ProgramToolStripMenuItem.Size = New Size(316, 34)
+        ProgramToolStripMenuItem.Size = New Size(229, 30)
         ProgramToolStripMenuItem.Text = "Port Configuration"
         ' 
         ' ToolStripSeparator1
         ' 
         ToolStripSeparator1.Name = "ToolStripSeparator1"
-        ToolStripSeparator1.Size = New Size(313, 6)
+        ToolStripSeparator1.Size = New Size(226, 6)
         ' 
         ' UserAccountsToolStripMenuItem
         ' 
         UserAccountsToolStripMenuItem.Image = CType(resources.GetObject("UserAccountsToolStripMenuItem.Image"), Image)
         UserAccountsToolStripMenuItem.Name = "UserAccountsToolStripMenuItem"
-        UserAccountsToolStripMenuItem.Size = New Size(316, 34)
+        UserAccountsToolStripMenuItem.Size = New Size(229, 30)
         UserAccountsToolStripMenuItem.Text = "User Accounts"
+        ' 
+        ' ToolStripSeparator6
+        ' 
+        ToolStripSeparator6.Name = "ToolStripSeparator6"
+        ToolStripSeparator6.Size = New Size(226, 6)
         ' 
         ' PermittedWeightPerAxleToolStripMenuItem
         ' 
         PermittedWeightPerAxleToolStripMenuItem.Image = CType(resources.GetObject("PermittedWeightPerAxleToolStripMenuItem.Image"), Image)
         PermittedWeightPerAxleToolStripMenuItem.Name = "PermittedWeightPerAxleToolStripMenuItem"
-        PermittedWeightPerAxleToolStripMenuItem.Size = New Size(316, 34)
+        PermittedWeightPerAxleToolStripMenuItem.Size = New Size(229, 30)
         PermittedWeightPerAxleToolStripMenuItem.Text = "Permitted Weight per Axle"
+        ' 
+        ' SerialNumberToolStripMenuItem
+        ' 
+        SerialNumberToolStripMenuItem.Image = CType(resources.GetObject("SerialNumberToolStripMenuItem.Image"), Image)
+        SerialNumberToolStripMenuItem.Name = "SerialNumberToolStripMenuItem"
+        SerialNumberToolStripMenuItem.Size = New Size(229, 30)
+        SerialNumberToolStripMenuItem.Text = "Serial Number"
+        ' 
+        ' CalibrationNumberToolStripMenuItem
+        ' 
+        CalibrationNumberToolStripMenuItem.Image = CType(resources.GetObject("CalibrationNumberToolStripMenuItem.Image"), Image)
+        CalibrationNumberToolStripMenuItem.Name = "CalibrationNumberToolStripMenuItem"
+        CalibrationNumberToolStripMenuItem.Size = New Size(229, 30)
+        CalibrationNumberToolStripMenuItem.Text = "Calibration Number"
         ' 
         ' StatusStrip1
         ' 
-        StatusStrip1.Font = New Font("Segoe UI", 10F)
+        StatusStrip1.Font = New Font("Segoe UI", 10.0F)
         StatusStrip1.ImageScalingSize = New Size(24, 24)
         StatusStrip1.Items.AddRange(New ToolStripItem() {lblUser, lblPortStatus, lblmode, lblStatus})
-        StatusStrip1.Location = New Point(0, 1731)
+        StatusStrip1.Location = New Point(0, 681)
         StatusStrip1.Name = "StatusStrip1"
-        StatusStrip1.Size = New Size(1851, 39)
+        StatusStrip1.Padding = New Padding(1, 0, 10, 0)
+        StatusStrip1.Size = New Size(1296, 28)
         StatusStrip1.TabIndex = 2
         StatusStrip1.Text = "StatusStrip1"
         ' 
@@ -177,27 +256,27 @@ Partial Class frmMain
         ' 
         lblUser.BorderSides = ToolStripStatusLabelBorderSides.Right
         lblUser.Name = "lblUser"
-        lblUser.Size = New Size(204, 32)
+        lblUser.Size = New Size(144, 23)
         lblUser.Text = "ToolStripStatusLabel1"
         ' 
         ' lblPortStatus
         ' 
         lblPortStatus.BorderSides = ToolStripStatusLabelBorderSides.Right
         lblPortStatus.Name = "lblPortStatus"
-        lblPortStatus.Size = New Size(204, 32)
+        lblPortStatus.Size = New Size(144, 23)
         lblPortStatus.Text = "ToolStripStatusLabel1"
         ' 
         ' lblmode
         ' 
         lblmode.BorderSides = ToolStripStatusLabelBorderSides.Right
         lblmode.Name = "lblmode"
-        lblmode.Size = New Size(132, 32)
+        lblmode.Size = New Size(95, 23)
         lblmode.Text = "W-Mode : {0}"
         ' 
         ' lblStatus
         ' 
         lblStatus.Name = "lblStatus"
-        lblStatus.Size = New Size(200, 32)
+        lblStatus.Size = New Size(140, 23)
         lblStatus.Text = "ToolStripStatusLabel1"
         ' 
         ' Panel1
@@ -209,61 +288,67 @@ Partial Class frmMain
         Panel1.Controls.Add(Label7)
         Panel1.Controls.Add(PictureBox1)
         Panel1.Dock = DockStyle.Top
-        Panel1.Location = New Point(0, 30)
+        Panel1.Location = New Point(0, 24)
+        Panel1.Margin = New Padding(2)
         Panel1.Name = "Panel1"
-        Panel1.Size = New Size(1851, 172)
+        Panel1.Size = New Size(1296, 103)
         Panel1.TabIndex = 3
         ' 
         ' Label15
         ' 
         Label15.AutoSize = True
-        Label15.Font = New Font("Tahoma", 9F, FontStyle.Bold)
+        Label15.Font = New Font("Tahoma", 9.0F, FontStyle.Bold)
         Label15.ForeColor = Color.Navy
-        Label15.Location = New Point(167, 115)
+        Label15.Location = New Point(117, 69)
+        Label15.Margin = New Padding(2, 0, 2, 0)
         Label15.Name = "Label15"
-        Label15.Size = New Size(242, 22)
+        Label15.Size = New Size(168, 14)
         Label15.TabIndex = 9
         Label15.Text = "DOLORES CAPAS, TARLAC"
         ' 
         ' Label14
         ' 
         Label14.AutoSize = True
-        Label14.Font = New Font("Tahoma", 9F, FontStyle.Bold)
+        Label14.Font = New Font("Tahoma", 9.0F, FontStyle.Bold)
         Label14.ForeColor = Color.Navy
-        Label14.Location = New Point(167, 88)
+        Label14.Location = New Point(117, 53)
+        Label14.Margin = New Padding(2, 0, 2, 0)
         Label14.Name = "Label14"
-        Label14.Size = New Size(299, 22)
+        Label14.Size = New Size(197, 14)
         Label14.TabIndex = 8
         Label14.Text = "CAPAS WEIGHBRIDGE STATION"
         ' 
         ' Label13
         ' 
         Label13.AutoSize = True
-        Label13.Font = New Font("Tahoma", 9F, FontStyle.Bold)
+        Label13.Font = New Font("Tahoma", 9.0F, FontStyle.Bold)
         Label13.ForeColor = Color.Navy
-        Label13.Location = New Point(167, 62)
+        Label13.Location = New Point(117, 37)
+        Label13.Margin = New Padding(2, 0, 2, 0)
         Label13.Name = "Label13"
-        Label13.Size = New Size(427, 22)
+        Label13.Size = New Size(276, 14)
         Label13.TabIndex = 7
         Label13.Text = "TARLAC 2ND DISTRICT ENGINEERING OFFICE"
         ' 
         ' Label7
         ' 
         Label7.AutoSize = True
-        Label7.Font = New Font("Tahoma", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label7.Font = New Font("Tahoma", 12.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label7.ForeColor = Color.Navy
-        Label7.Location = New Point(167, 22)
+        Label7.Location = New Point(117, 13)
+        Label7.Margin = New Padding(2, 0, 2, 0)
         Label7.Name = "Label7"
-        Label7.Size = New Size(622, 29)
+        Label7.Size = New Size(420, 19)
         Label7.TabIndex = 6
         Label7.Text = "DEPARTMENT OF PUBLIC WORKS AND HIGHWAYS"
         ' 
         ' PictureBox1
         ' 
         PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), Image)
-        PictureBox1.Location = New Point(11, 12)
+        PictureBox1.Location = New Point(8, 7)
+        PictureBox1.Margin = New Padding(2)
         PictureBox1.Name = "PictureBox1"
-        PictureBox1.Size = New Size(144, 137)
+        PictureBox1.Size = New Size(101, 82)
         PictureBox1.SizeMode = PictureBoxSizeMode.StretchImage
         PictureBox1.TabIndex = 0
         PictureBox1.TabStop = False
@@ -285,9 +370,10 @@ Partial Class frmMain
         Panel2.Controls.Add(Panel5)
         Panel2.Controls.Add(Panel3)
         Panel2.Dock = DockStyle.Fill
-        Panel2.Location = New Point(0, 202)
+        Panel2.Location = New Point(0, 127)
+        Panel2.Margin = New Padding(2)
         Panel2.Name = "Panel2"
-        Panel2.Size = New Size(864, 1529)
+        Panel2.Size = New Size(604, 554)
         Panel2.TabIndex = 6
         ' 
         ' Panel4
@@ -295,11 +381,10 @@ Partial Class frmMain
         Panel4.Controls.Add(dgtransaction)
         Panel4.Controls.Add(Panel11)
         Panel4.Dock = DockStyle.Fill
-        Panel4.Font = New Font("Tahoma", 10F)
-        Panel4.Location = New Point(0, 163)
-        Panel4.Margin = New Padding(4, 5, 4, 5)
+        Panel4.Font = New Font("Tahoma", 10.0F)
+        Panel4.Location = New Point(0, 117)
         Panel4.Name = "Panel4"
-        Panel4.Size = New Size(864, 1288)
+        Panel4.Size = New Size(604, 390)
         Panel4.TabIndex = 9
         ' 
         ' dgtransaction
@@ -314,12 +399,13 @@ Partial Class frmMain
         dgtransaction.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
         dgtransaction.Dock = DockStyle.Fill
         dgtransaction.GridColor = SystemColors.ButtonFace
-        dgtransaction.Location = New Point(0, 5)
+        dgtransaction.Location = New Point(0, 3)
+        dgtransaction.Margin = New Padding(2)
         dgtransaction.Name = "dgtransaction"
         dgtransaction.RowHeadersVisible = False
         dgtransaction.RowHeadersWidth = 62
         dgtransaction.SelectionMode = DataGridViewSelectionMode.FullRowSelect
-        dgtransaction.Size = New Size(864, 1283)
+        dgtransaction.Size = New Size(604, 387)
         dgtransaction.TabIndex = 12
         ' 
         ' Panel11
@@ -327,31 +413,30 @@ Partial Class frmMain
         Panel11.BackColor = Color.DodgerBlue
         Panel11.Dock = DockStyle.Top
         Panel11.Location = New Point(0, 0)
-        Panel11.Margin = New Padding(4, 5, 4, 5)
         Panel11.Name = "Panel11"
-        Panel11.Size = New Size(864, 5)
+        Panel11.Size = New Size(604, 3)
         Panel11.TabIndex = 11
         ' 
         ' ToolStrip1
         ' 
-        ToolStrip1.Font = New Font("Tahoma", 9F)
+        ToolStrip1.Font = New Font("Tahoma", 9.0F)
         ToolStrip1.GripStyle = ToolStripGripStyle.Hidden
         ToolStrip1.ImageScalingSize = New Size(24, 24)
         ToolStrip1.Items.AddRange(New ToolStripItem() {ToolStripLabel1, txtsearch, ToolStripSeparator2, ToolStripButton1})
-        ToolStrip1.Location = New Point(0, 115)
+        ToolStrip1.Location = New Point(0, 69)
         ToolStrip1.Name = "ToolStrip1"
-        ToolStrip1.Padding = New Padding(0, 0, 3, 0)
+        ToolStrip1.Padding = New Padding(0, 0, 2, 0)
         ToolStrip1.RightToLeft = RightToLeft.No
-        ToolStrip1.Size = New Size(864, 48)
+        ToolStrip1.Size = New Size(604, 48)
         ToolStrip1.TabIndex = 8
         ToolStrip1.Text = "ToolStrip1"
         ' 
         ' ToolStripLabel1
         ' 
-        ToolStripLabel1.Font = New Font("Tahoma", 10F)
+        ToolStripLabel1.Font = New Font("Tahoma", 10.0F)
         ToolStripLabel1.Margin = New Padding(10, 1, 0, 2)
         ToolStripLabel1.Name = "ToolStripLabel1"
-        ToolStripLabel1.Size = New Size(47, 45)
+        ToolStripLabel1.Size = New Size(33, 45)
         ToolStripLabel1.Text = "Find"
         ToolStripLabel1.TextAlign = ContentAlignment.MiddleLeft
         ' 
@@ -359,11 +444,11 @@ Partial Class frmMain
         ' 
         txtsearch.AutoSize = False
         txtsearch.BorderStyle = BorderStyle.FixedSingle
-        txtsearch.Font = New Font("Segoe UI", 10F)
+        txtsearch.Font = New Font("Segoe UI", 10.0F)
         txtsearch.Margin = New Padding(7)
         txtsearch.Name = "txtsearch"
         txtsearch.RightToLeft = RightToLeft.No
-        txtsearch.Size = New Size(428, 34)
+        txtsearch.Size = New Size(300, 25)
         ' 
         ' ToolStripSeparator2
         ' 
@@ -378,7 +463,7 @@ Partial Class frmMain
         ToolStripButton1.Margin = New Padding(5)
         ToolStripButton1.Name = "ToolStripButton1"
         ToolStripButton1.Padding = New Padding(10, 0, 10, 10)
-        ToolStripButton1.Size = New Size(105, 38)
+        ToolStripButton1.Size = New Size(80, 38)
         ToolStripButton1.Text = "  Refresh"
         ToolStripButton1.TextAlign = ContentAlignment.MiddleRight
         ToolStripButton1.TextImageRelation = TextImageRelation.Overlay
@@ -390,19 +475,21 @@ Partial Class frmMain
         Panel5.Controls.Add(Panel6)
         Panel5.Controls.Add(Panel14)
         Panel5.Dock = DockStyle.Bottom
-        Panel5.Font = New Font("Tahoma", 9F)
-        Panel5.Location = New Point(0, 1451)
+        Panel5.Font = New Font("Tahoma", 9.0F)
+        Panel5.Location = New Point(0, 507)
+        Panel5.Margin = New Padding(2)
         Panel5.Name = "Panel5"
-        Panel5.Size = New Size(864, 78)
+        Panel5.Size = New Size(604, 47)
         Panel5.TabIndex = 6
         ' 
         ' Panel15
         ' 
         Panel15.Controls.Add(Button3)
         Panel15.Dock = DockStyle.Left
-        Panel15.Location = New Point(0, 5)
+        Panel15.Location = New Point(0, 3)
+        Panel15.Margin = New Padding(2)
         Panel15.Name = "Panel15"
-        Panel15.Size = New Size(221, 73)
+        Panel15.Size = New Size(155, 44)
         Panel15.TabIndex = 9
         ' 
         ' Button3
@@ -410,13 +497,14 @@ Partial Class frmMain
         Button3.Cursor = Cursors.Hand
         Button3.FlatAppearance.BorderSize = 0
         Button3.FlatStyle = FlatStyle.Flat
-        Button3.Font = New Font("Tahoma", 9F)
+        Button3.Font = New Font("Tahoma", 9.0F)
         Button3.ImageAlign = ContentAlignment.MiddleLeft
         Button3.ImageKey = "delete.png"
         Button3.ImageList = ImageList1
-        Button3.Location = New Point(16, 15)
+        Button3.Location = New Point(11, 9)
+        Button3.Margin = New Padding(2)
         Button3.Name = "Button3"
-        Button3.Size = New Size(174, 42)
+        Button3.Size = New Size(122, 25)
         Button3.TabIndex = 0
         Button3.Text = "Delete Record "
         Button3.TextAlign = ContentAlignment.MiddleRight
@@ -428,40 +516,41 @@ Partial Class frmMain
         ImageList1.ImageStream = CType(resources.GetObject("ImageList1.ImageStream"), ImageListStreamer)
         ImageList1.TransparentColor = Color.Transparent
         ImageList1.Images.SetKeyName(0, "refresh.png")
-        ImageList1.Images.SetKeyName(1, "excell.png")
-        ImageList1.Images.SetKeyName(2, "dynamic.png")
+        ImageList1.Images.SetKeyName(1, "dynamic.png")
+        ImageList1.Images.SetKeyName(2, "static.png")
         ImageList1.Images.SetKeyName(3, "static.png")
-        ImageList1.Images.SetKeyName(4, "save.png")
-        ImageList1.Images.SetKeyName(5, "saveandprint.png")
-        ImageList1.Images.SetKeyName(6, "static.png")
-        ImageList1.Images.SetKeyName(7, "print1.png")
-        ImageList1.Images.SetKeyName(8, "new.png")
-        ImageList1.Images.SetKeyName(9, "delete.png")
-        ImageList1.Images.SetKeyName(10, "start.png")
-        ImageList1.Images.SetKeyName(11, "stop.png")
+        ImageList1.Images.SetKeyName(4, "start.png")
+        ImageList1.Images.SetKeyName(5, "stop.png")
+        ImageList1.Images.SetKeyName(6, "print1.png")
+        ImageList1.Images.SetKeyName(7, "saveandprint.png")
+        ImageList1.Images.SetKeyName(8, "save.png")
+        ImageList1.Images.SetKeyName(9, "new.png")
+        ImageList1.Images.SetKeyName(10, "delete.png")
+        ImageList1.Images.SetKeyName(11, "excel.png")
         ' 
         ' Panel6
         ' 
         Panel6.Controls.Add(Button1)
         Panel6.Dock = DockStyle.Right
-        Panel6.Location = New Point(643, 5)
+        Panel6.Location = New Point(449, 3)
+        Panel6.Margin = New Padding(2)
         Panel6.Name = "Panel6"
-        Panel6.Size = New Size(221, 73)
+        Panel6.Size = New Size(155, 44)
         Panel6.TabIndex = 8
-        Panel6.Visible = False
         ' 
         ' Button1
         ' 
         Button1.Cursor = Cursors.Hand
         Button1.FlatAppearance.BorderSize = 0
         Button1.FlatStyle = FlatStyle.Flat
-        Button1.Font = New Font("Tahoma", 9F)
+        Button1.Font = New Font("Tahoma", 9.0F)
         Button1.ImageAlign = ContentAlignment.MiddleLeft
-        Button1.ImageKey = "excell.png"
+        Button1.ImageKey = "excel.png"
         Button1.ImageList = ImageList1
-        Button1.Location = New Point(16, 15)
+        Button1.Location = New Point(11, 9)
+        Button1.Margin = New Padding(2)
         Button1.Name = "Button1"
-        Button1.Size = New Size(181, 42)
+        Button1.Size = New Size(127, 25)
         Button1.TabIndex = 0
         Button1.Text = "Export to Excel"
         Button1.TextAlign = ContentAlignment.MiddleRight
@@ -472,9 +561,8 @@ Partial Class frmMain
         Panel14.BackColor = Color.DodgerBlue
         Panel14.Dock = DockStyle.Top
         Panel14.Location = New Point(0, 0)
-        Panel14.Margin = New Padding(4, 5, 4, 5)
         Panel14.Name = "Panel14"
-        Panel14.Size = New Size(864, 5)
+        Panel14.Size = New Size(604, 3)
         Panel14.TabIndex = 7
         ' 
         ' Panel3
@@ -487,66 +575,71 @@ Partial Class frmMain
         Panel3.Controls.Add(Label2)
         Panel3.Controls.Add(Label1)
         Panel3.Dock = DockStyle.Top
-        Panel3.Font = New Font("Segoe UI", 10F)
+        Panel3.Font = New Font("Segoe UI", 10.0F)
         Panel3.Location = New Point(0, 0)
+        Panel3.Margin = New Padding(2)
         Panel3.Name = "Panel3"
-        Panel3.Size = New Size(864, 115)
+        Panel3.Size = New Size(604, 69)
         Panel3.TabIndex = 4
         ' 
         ' Panel12
         ' 
         Panel12.BackColor = Color.DodgerBlue
         Panel12.Dock = DockStyle.Bottom
-        Panel12.Location = New Point(0, 110)
-        Panel12.Margin = New Padding(4, 5, 4, 5)
+        Panel12.Location = New Point(0, 66)
         Panel12.Name = "Panel12"
-        Panel12.Size = New Size(864, 5)
+        Panel12.Size = New Size(604, 3)
         Panel12.TabIndex = 5
         ' 
         ' Label3
         ' 
         Label3.AutoSize = True
         Label3.Font = New Font("Segoe UI", 9.75F)
-        Label3.Location = New Point(354, 63)
+        Label3.Location = New Point(248, 38)
+        Label3.Margin = New Padding(2, 0, 2, 0)
         Label3.Name = "Label3"
-        Label3.Size = New Size(31, 28)
+        Label3.Size = New Size(20, 17)
         Label3.TabIndex = 4
         Label3.Text = "to"
         ' 
         ' dtpto
         ' 
         dtpto.Format = DateTimePickerFormat.Short
-        dtpto.Location = New Point(391, 57)
+        dtpto.Location = New Point(274, 34)
+        dtpto.Margin = New Padding(2)
         dtpto.Name = "dtpto"
-        dtpto.Size = New Size(183, 34)
+        dtpto.Size = New Size(129, 25)
         dtpto.TabIndex = 3
         ' 
         ' dtpfrom
         ' 
         dtpfrom.Format = DateTimePickerFormat.Short
-        dtpfrom.Location = New Point(161, 57)
+        dtpfrom.Location = New Point(113, 34)
+        dtpfrom.Margin = New Padding(2)
         dtpfrom.Name = "dtpfrom"
-        dtpfrom.Size = New Size(183, 34)
+        dtpfrom.Size = New Size(129, 25)
         dtpfrom.TabIndex = 2
         ' 
         ' Label2
         ' 
         Label2.AutoSize = True
         Label2.Font = New Font("Segoe UI", 9.75F)
-        Label2.Location = New Point(17, 63)
+        Label2.Location = New Point(12, 38)
+        Label2.Margin = New Padding(2, 0, 2, 0)
         Label2.Name = "Label2"
-        Label2.Size = New Size(155, 28)
+        Label2.Size = New Size(106, 17)
         Label2.TabIndex = 1
         Label2.Text = "Date Coverage : "
         ' 
         ' Label1
         ' 
         Label1.AutoSize = True
-        Label1.Font = New Font("Tahoma", 10F, FontStyle.Bold)
+        Label1.Font = New Font("Tahoma", 10.0F, FontStyle.Bold)
         Label1.ForeColor = Color.Navy
-        Label1.Location = New Point(11, 17)
+        Label1.Location = New Point(8, 10)
+        Label1.Margin = New Padding(2, 0, 2, 0)
         Label1.Name = "Label1"
-        Label1.Size = New Size(189, 24)
+        Label1.Size = New Size(136, 17)
         Label1.TabIndex = 0
         Label1.Text = "TRANSACTION(S)"
         ' 
@@ -573,20 +666,22 @@ Partial Class frmMain
         Panel7.Controls.Add(Label6)
         Panel7.Controls.Add(Panel8)
         Panel7.Dock = DockStyle.Right
-        Panel7.Font = New Font("Tahoma", 9F)
-        Panel7.Location = New Point(864, 202)
+        Panel7.Font = New Font("Tahoma", 9.0F)
+        Panel7.Location = New Point(604, 127)
+        Panel7.Margin = New Padding(2)
         Panel7.Name = "Panel7"
-        Panel7.Size = New Size(987, 1529)
+        Panel7.Size = New Size(692, 554)
         Panel7.TabIndex = 2
         ' 
         ' lblindicator
         ' 
         lblindicator.AutoSize = True
-        lblindicator.Font = New Font("Calibri", 12F, FontStyle.Bold)
+        lblindicator.Font = New Font("Calibri", 12.0F, FontStyle.Bold)
         lblindicator.ForeColor = Color.Blue
-        lblindicator.Location = New Point(581, 820)
+        lblindicator.Location = New Point(407, 492)
+        lblindicator.Margin = New Padding(2, 0, 2, 0)
         lblindicator.Name = "lblindicator"
-        lblindicator.Size = New Size(131, 29)
+        lblindicator.Size = New Size(88, 19)
         lblindicator.TabIndex = 31
         lblindicator.Text = "Completed!"
         lblindicator.TextAlign = ContentAlignment.MiddleLeft
@@ -595,20 +690,22 @@ Partial Class frmMain
         ' txtmaxweight
         ' 
         txtmaxweight.BackColor = Color.FloralWhite
-        txtmaxweight.Font = New Font("Tahoma", 10F)
-        txtmaxweight.Location = New Point(581, 618)
+        txtmaxweight.Font = New Font("Tahoma", 10.0F)
+        txtmaxweight.Location = New Point(407, 371)
+        txtmaxweight.Margin = New Padding(2)
         txtmaxweight.Name = "txtmaxweight"
         txtmaxweight.ReadOnly = True
-        txtmaxweight.Size = New Size(370, 32)
+        txtmaxweight.Size = New Size(260, 24)
         txtmaxweight.TabIndex = 26
         ' 
         ' Label4
         ' 
         Label4.AutoSize = True
         Label4.Font = New Font("Segoe UI", 9.75F)
-        Label4.Location = New Point(443, 623)
+        Label4.Location = New Point(310, 374)
+        Label4.Margin = New Padding(2, 0, 2, 0)
         Label4.Name = "Label4"
-        Label4.Size = New Size(126, 28)
+        Label4.Size = New Size(84, 17)
         Label4.TabIndex = 27
         Label4.Text = "Max Weight :"
         Label4.TextAlign = ContentAlignment.MiddleLeft
@@ -620,21 +717,21 @@ Partial Class frmMain
         Panel9.Controls.Add(btntoggle)
         Panel9.Controls.Add(lbldisplaymode)
         Panel9.Dock = DockStyle.Top
-        Panel9.Location = New Point(0, 207)
-        Panel9.Margin = New Padding(4, 5, 4, 5)
+        Panel9.Location = New Point(0, 124)
         Panel9.Name = "Panel9"
-        Panel9.Size = New Size(983, 78)
+        Panel9.Size = New Size(688, 47)
         Panel9.TabIndex = 24
         ' 
         ' Label5
         ' 
         Label5.Anchor = AnchorStyles.Top Or AnchorStyles.Right
         Label5.AutoSize = True
-        Label5.Font = New Font("Tahoma", 10F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label5.Font = New Font("Tahoma", 10.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label5.ForeColor = Color.White
-        Label5.Location = New Point(558, 23)
+        Label5.Location = New Point(391, 14)
+        Label5.Margin = New Padding(2, 0, 2, 0)
         Label5.Name = "Label5"
-        Label5.Size = New Size(189, 24)
+        Label5.Size = New Size(134, 17)
         Label5.TabIndex = 23
         Label5.Text = "CAPTURE MODE : "
         Label5.TextAlign = ContentAlignment.MiddleLeft
@@ -648,9 +745,10 @@ Partial Class frmMain
         btntoggle.FlatAppearance.BorderSize = 0
         btntoggle.ImageKey = "static.png"
         btntoggle.ImageList = ImageList2
-        btntoggle.Location = New Point(902, 7)
+        btntoggle.Location = New Point(631, 4)
+        btntoggle.Margin = New Padding(2)
         btntoggle.Name = "btntoggle"
-        btntoggle.Size = New Size(61, 65)
+        btntoggle.Size = New Size(43, 39)
         btntoggle.TabIndex = 21
         btntoggle.TextAlign = ContentAlignment.MiddleLeft
         btntoggle.UseVisualStyleBackColor = False
@@ -658,11 +756,12 @@ Partial Class frmMain
         ' lbldisplaymode
         ' 
         lbldisplaymode.Anchor = AnchorStyles.Top Or AnchorStyles.Right
-        lbldisplaymode.Font = New Font("Tahoma", 10F, FontStyle.Bold Or FontStyle.Italic, GraphicsUnit.Point, CByte(0))
+        lbldisplaymode.Font = New Font("Tahoma", 10.0F, FontStyle.Bold Or FontStyle.Italic, GraphicsUnit.Point, CByte(0))
         lbldisplaymode.ForeColor = Color.Azure
-        lbldisplaymode.Location = New Point(750, 13)
+        lbldisplaymode.Location = New Point(525, 8)
+        lbldisplaymode.Margin = New Padding(2, 0, 2, 0)
         lbldisplaymode.Name = "lbldisplaymode"
-        lbldisplaymode.Size = New Size(132, 48)
+        lbldisplaymode.Size = New Size(92, 29)
         lbldisplaymode.TabIndex = 22
         lbldisplaymode.Text = "STATIC"
         lbldisplaymode.TextAlign = ContentAlignment.MiddleCenter
@@ -670,17 +769,31 @@ Partial Class frmMain
         ' Panel10
         ' 
         Panel10.BackColor = Color.AliceBlue
+        Panel10.Controls.Add(chkenableSaveandPrint)
         Panel10.Controls.Add(Button2)
         Panel10.Controls.Add(btnsaveandprint)
         Panel10.Controls.Add(btnprint)
         Panel10.Controls.Add(btnsave)
         Panel10.Controls.Add(Panel13)
         Panel10.Dock = DockStyle.Bottom
-        Panel10.Font = New Font("Tahoma", 9F)
-        Panel10.Location = New Point(0, 1357)
+        Panel10.Font = New Font("Tahoma", 9.0F)
+        Panel10.Location = New Point(0, 441)
+        Panel10.Margin = New Padding(2)
         Panel10.Name = "Panel10"
-        Panel10.Size = New Size(983, 168)
+        Panel10.Size = New Size(688, 109)
         Panel10.TabIndex = 21
+        ' 
+        ' chkenableSaveandPrint
+        ' 
+        chkenableSaveandPrint.AutoSize = True
+        chkenableSaveandPrint.Font = New Font("Tahoma", 9.0F, FontStyle.Underline)
+        chkenableSaveandPrint.ForeColor = Color.FromArgb(CByte(0), CByte(0), CByte(192))
+        chkenableSaveandPrint.Location = New Point(125, 83)
+        chkenableSaveandPrint.Name = "chkenableSaveandPrint"
+        chkenableSaveandPrint.Size = New Size(446, 18)
+        chkenableSaveandPrint.TabIndex = 20
+        chkenableSaveandPrint.Text = "Enable Save and Print when STATIC mode, otherwise SAVE only by default."
+        chkenableSaveandPrint.UseVisualStyleBackColor = True
         ' 
         ' Button2
         ' 
@@ -688,14 +801,15 @@ Partial Class frmMain
         Button2.Cursor = Cursors.Hand
         Button2.FlatAppearance.BorderColor = Color.FromArgb(CByte(224), CByte(224), CByte(224))
         Button2.FlatStyle = FlatStyle.Flat
-        Button2.Font = New Font("Tahoma", 9F)
+        Button2.Font = New Font("Tahoma", 9.0F)
         Button2.ImageAlign = ContentAlignment.TopCenter
         Button2.ImageKey = "new.png"
         Button2.ImageList = ImageList1
-        Button2.Location = New Point(239, 32)
+        Button2.Location = New Point(167, 9)
+        Button2.Margin = New Padding(2)
         Button2.Name = "Button2"
-        Button2.Padding = New Padding(0, 8, 0, 8)
-        Button2.Size = New Size(114, 113)
+        Button2.Padding = New Padding(0, 5, 0, 5)
+        Button2.Size = New Size(80, 68)
         Button2.TabIndex = 19
         Button2.Text = "New Entry"
         Button2.TextAlign = ContentAlignment.BottomCenter
@@ -707,14 +821,15 @@ Partial Class frmMain
         btnsaveandprint.Cursor = Cursors.Hand
         btnsaveandprint.FlatAppearance.BorderColor = Color.FromArgb(CByte(224), CByte(224), CByte(224))
         btnsaveandprint.FlatStyle = FlatStyle.Flat
-        btnsaveandprint.Font = New Font("Tahoma", 9F)
+        btnsaveandprint.Font = New Font("Tahoma", 9.0F)
         btnsaveandprint.ImageAlign = ContentAlignment.TopCenter
         btnsaveandprint.ImageKey = "saveandprint.png"
         btnsaveandprint.ImageList = ImageList1
-        btnsaveandprint.Location = New Point(482, 32)
+        btnsaveandprint.Location = New Point(337, 9)
+        btnsaveandprint.Margin = New Padding(2)
         btnsaveandprint.Name = "btnsaveandprint"
-        btnsaveandprint.Padding = New Padding(0, 8, 0, 8)
-        btnsaveandprint.Size = New Size(143, 113)
+        btnsaveandprint.Padding = New Padding(0, 5, 0, 5)
+        btnsaveandprint.Size = New Size(100, 68)
         btnsaveandprint.TabIndex = 18
         btnsaveandprint.Text = "Save and Print"
         btnsaveandprint.TextAlign = ContentAlignment.BottomCenter
@@ -726,14 +841,15 @@ Partial Class frmMain
         btnprint.Cursor = Cursors.Hand
         btnprint.FlatAppearance.BorderColor = Color.FromArgb(CByte(224), CByte(224), CByte(224))
         btnprint.FlatStyle = FlatStyle.Flat
-        btnprint.Font = New Font("Tahoma", 9F)
+        btnprint.Font = New Font("Tahoma", 9.0F)
         btnprint.ImageAlign = ContentAlignment.TopCenter
         btnprint.ImageKey = "print1.png"
         btnprint.ImageList = ImageList1
-        btnprint.Location = New Point(632, 32)
+        btnprint.Location = New Point(442, 9)
+        btnprint.Margin = New Padding(2)
         btnprint.Name = "btnprint"
-        btnprint.Padding = New Padding(0, 8, 0, 8)
-        btnprint.Size = New Size(114, 113)
+        btnprint.Padding = New Padding(0, 5, 0, 5)
+        btnprint.Size = New Size(80, 68)
         btnprint.TabIndex = 17
         btnprint.Text = "Print"
         btnprint.TextAlign = ContentAlignment.BottomCenter
@@ -745,14 +861,15 @@ Partial Class frmMain
         btnsave.Cursor = Cursors.Hand
         btnsave.FlatAppearance.BorderColor = Color.FromArgb(CByte(224), CByte(224), CByte(224))
         btnsave.FlatStyle = FlatStyle.Flat
-        btnsave.Font = New Font("Tahoma", 9F)
+        btnsave.Font = New Font("Tahoma", 9.0F)
         btnsave.ImageAlign = ContentAlignment.TopCenter
         btnsave.ImageKey = "save.png"
         btnsave.ImageList = ImageList1
-        btnsave.Location = New Point(360, 32)
+        btnsave.Location = New Point(252, 9)
+        btnsave.Margin = New Padding(2)
         btnsave.Name = "btnsave"
-        btnsave.Padding = New Padding(0, 8, 0, 8)
-        btnsave.Size = New Size(114, 113)
+        btnsave.Padding = New Padding(0, 5, 0, 5)
+        btnsave.Size = New Size(80, 68)
         btnsave.TabIndex = 16
         btnsave.Text = "Save"
         btnsave.TextAlign = ContentAlignment.BottomCenter
@@ -763,9 +880,8 @@ Partial Class frmMain
         Panel13.BackColor = Color.DodgerBlue
         Panel13.Dock = DockStyle.Top
         Panel13.Location = New Point(0, 0)
-        Panel13.Margin = New Padding(4, 5, 4, 5)
         Panel13.Name = "Panel13"
-        Panel13.Size = New Size(983, 5)
+        Panel13.Size = New Size(688, 3)
         Panel13.TabIndex = 10
         ' 
         ' dtgReadings
@@ -778,12 +894,13 @@ Partial Class frmMain
         dtgReadings.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
         dtgReadings.Columns.AddRange(New DataGridViewColumn() {DataGridViewTextBoxColumn1, DataGridViewTextBoxColumn2, manualCapture})
         dtgReadings.GridColor = Color.White
-        dtgReadings.Location = New Point(19, 383)
+        dtgReadings.Location = New Point(13, 230)
+        dtgReadings.Margin = New Padding(2)
         dtgReadings.Name = "dtgReadings"
         dtgReadings.ReadOnly = True
         dtgReadings.RowHeadersVisible = False
         dtgReadings.RowHeadersWidth = 62
-        dtgReadings.Size = New Size(411, 956)
+        dtgReadings.Size = New Size(288, 209)
         dtgReadings.TabIndex = 4
         ' 
         ' DataGridViewTextBoxColumn1
@@ -812,47 +929,52 @@ Partial Class frmMain
         ' 
         ' txtsn
         ' 
-        txtsn.Font = New Font("Tahoma", 10F)
-        txtsn.Location = New Point(581, 378)
+        txtsn.Font = New Font("Tahoma", 10.0F)
+        txtsn.Location = New Point(407, 227)
+        txtsn.Margin = New Padding(2)
         txtsn.Name = "txtsn"
         txtsn.ReadOnly = True
-        txtsn.Size = New Size(370, 32)
+        txtsn.Size = New Size(260, 24)
         txtsn.TabIndex = 18
         ' 
         ' Label12
         ' 
         Label12.AutoSize = True
         Label12.Font = New Font("Segoe UI", 9.75F)
-        Label12.Location = New Point(510, 383)
+        Label12.Location = New Point(357, 230)
+        Label12.Margin = New Padding(2, 0, 2, 0)
         Label12.Name = "Label12"
-        Label12.Size = New Size(55, 28)
+        Label12.Size = New Size(37, 17)
         Label12.TabIndex = 17
         Label12.Text = "S/N :"
         Label12.TextAlign = ContentAlignment.MiddleLeft
         ' 
         ' txtdrivername
         ' 
-        txtdrivername.Font = New Font("Tahoma", 10F)
-        txtdrivername.Location = New Point(581, 698)
+        txtdrivername.Font = New Font("Tahoma", 10.0F)
+        txtdrivername.Location = New Point(407, 419)
+        txtdrivername.Margin = New Padding(2)
         txtdrivername.Name = "txtdrivername"
-        txtdrivername.Size = New Size(370, 32)
+        txtdrivername.Size = New Size(260, 24)
         txtdrivername.TabIndex = 2
         ' 
         ' txtplateno
         ' 
-        txtplateno.Font = New Font("Tahoma", 10F)
-        txtplateno.Location = New Point(581, 753)
+        txtplateno.Font = New Font("Tahoma", 10.0F)
+        txtplateno.Location = New Point(407, 452)
+        txtplateno.Margin = New Padding(2)
         txtplateno.Name = "txtplateno"
-        txtplateno.Size = New Size(370, 32)
+        txtplateno.Size = New Size(260, 24)
         txtplateno.TabIndex = 3
         ' 
         ' Label11
         ' 
         Label11.AutoSize = True
         Label11.Font = New Font("Segoe UI", 9.75F)
-        Label11.Location = New Point(466, 758)
+        Label11.Location = New Point(326, 455)
+        Label11.Margin = New Padding(2, 0, 2, 0)
         Label11.Name = "Label11"
-        Label11.Size = New Size(100, 28)
+        Label11.Size = New Size(68, 17)
         Label11.TabIndex = 14
         Label11.Text = "Plate No. :"
         Label11.TextAlign = ContentAlignment.MiddleLeft
@@ -861,9 +983,10 @@ Partial Class frmMain
         ' 
         Label10.AutoSize = True
         Label10.Font = New Font("Segoe UI", 9.75F)
-        Label10.Location = New Point(436, 703)
+        Label10.Location = New Point(305, 422)
+        Label10.Margin = New Padding(2, 0, 2, 0)
         Label10.Name = "Label10"
-        Label10.Size = New Size(131, 28)
+        Label10.Size = New Size(89, 17)
         Label10.TabIndex = 13
         Label10.Text = "Driver Name :"
         Label10.TextAlign = ContentAlignment.MiddleLeft
@@ -872,9 +995,10 @@ Partial Class frmMain
         ' 
         Label9.AutoSize = True
         Label9.Font = New Font("Segoe UI", 9.75F)
-        Label9.Location = New Point(447, 502)
+        Label9.Location = New Point(313, 301)
+        Label9.Margin = New Padding(2, 0, 2, 0)
         Label9.Name = "Label9"
-        Label9.Size = New Size(121, 28)
+        Label9.Size = New Size(81, 17)
         Label9.TabIndex = 12
         Label9.Text = "Description :"
         Label9.TextAlign = ContentAlignment.MiddleLeft
@@ -882,31 +1006,34 @@ Partial Class frmMain
         ' cbocode
         ' 
         cbocode.DropDownStyle = ComboBoxStyle.DropDownList
-        cbocode.Font = New Font("Tahoma", 10F)
+        cbocode.Font = New Font("Tahoma", 10.0F)
         cbocode.FormattingEnabled = True
-        cbocode.Location = New Point(581, 440)
+        cbocode.Location = New Point(407, 264)
+        cbocode.Margin = New Padding(2)
         cbocode.Name = "cbocode"
-        cbocode.Size = New Size(370, 32)
+        cbocode.Size = New Size(260, 24)
         cbocode.TabIndex = 1
         ' 
         ' txtcodedescription
         ' 
         txtcodedescription.BackColor = Color.FloralWhite
-        txtcodedescription.Font = New Font("Tahoma", 10F)
-        txtcodedescription.Location = New Point(581, 503)
+        txtcodedescription.Font = New Font("Tahoma", 10.0F)
+        txtcodedescription.Location = New Point(407, 302)
+        txtcodedescription.Margin = New Padding(2)
         txtcodedescription.Multiline = True
         txtcodedescription.Name = "txtcodedescription"
         txtcodedescription.ReadOnly = True
-        txtcodedescription.Size = New Size(370, 96)
+        txtcodedescription.Size = New Size(260, 59)
         txtcodedescription.TabIndex = 10
         ' 
         ' Label8
         ' 
         Label8.AutoSize = True
         Label8.Font = New Font("Segoe UI", 9.75F)
-        Label8.Location = New Point(497, 443)
+        Label8.Location = New Point(348, 266)
+        Label8.Margin = New Padding(2, 0, 2, 0)
         Label8.Name = "Label8"
-        Label8.Size = New Size(67, 28)
+        Label8.Size = New Size(46, 17)
         Label8.TabIndex = 9
         Label8.Text = "Code :"
         Label8.TextAlign = ContentAlignment.MiddleLeft
@@ -914,11 +1041,12 @@ Partial Class frmMain
         ' Label6
         ' 
         Label6.AutoSize = True
-        Label6.Font = New Font("Tahoma", 10F, FontStyle.Bold)
+        Label6.Font = New Font("Tahoma", 10.0F, FontStyle.Bold)
         Label6.ForeColor = Color.Navy
-        Label6.Location = New Point(19, 309)
+        Label6.Location = New Point(13, 185)
+        Label6.Margin = New Padding(2, 0, 2, 0)
         Label6.Name = "Label6"
-        Label6.Size = New Size(279, 24)
+        Label6.Size = New Size(199, 17)
         Label6.TabIndex = 8
         Label6.Text = "DETAILS OF THE WEIGHIN"
         ' 
@@ -928,18 +1056,20 @@ Partial Class frmMain
         Panel8.Controls.Add(lblreading)
         Panel8.Dock = DockStyle.Top
         Panel8.Location = New Point(0, 0)
+        Panel8.Margin = New Padding(2)
         Panel8.Name = "Panel8"
-        Panel8.Size = New Size(983, 207)
+        Panel8.Size = New Size(688, 124)
         Panel8.TabIndex = 7
         ' 
         ' lblreading
         ' 
         lblreading.BackColor = Color.Black
-        lblreading.Font = New Font("Segoe UI", 60F)
+        lblreading.Font = New Font("Segoe UI", 60.0F)
         lblreading.ForeColor = Color.Lime
-        lblreading.Location = New Point(9, 8)
+        lblreading.Location = New Point(6, 5)
+        lblreading.Margin = New Padding(2, 0, 2, 0)
         lblreading.Name = "lblreading"
-        lblreading.Size = New Size(964, 190)
+        lblreading.Size = New Size(675, 114)
         lblreading.TabIndex = 0
         lblreading.Text = "5"
         lblreading.TextAlign = ContentAlignment.MiddleCenter
@@ -952,17 +1082,24 @@ Partial Class frmMain
         ' 
         SIMULATION.Interval = 1000
         ' 
+        ' ExitToolStripMenuItem
+        ' 
+        ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
+        ExitToolStripMenuItem.Size = New Size(188, 30)
+        ExitToolStripMenuItem.Text = "Exit"
+        ' 
         ' frmMain
         ' 
-        AutoScaleDimensions = New SizeF(10F, 25F)
+        AutoScaleDimensions = New SizeF(7.0F, 15.0F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(1851, 1770)
+        ClientSize = New Size(1296, 709)
         Controls.Add(Panel2)
         Controls.Add(Panel7)
         Controls.Add(Panel1)
         Controls.Add(StatusStrip1)
         Controls.Add(MenuStrip1)
         MainMenuStrip = MenuStrip1
+        Margin = New Padding(2)
         Name = "frmMain"
         Text = "JAAM Weigh Scale System"
         WindowState = FormWindowState.Maximized
@@ -989,6 +1126,7 @@ Partial Class frmMain
         Panel9.ResumeLayout(False)
         Panel9.PerformLayout()
         Panel10.ResumeLayout(False)
+        Panel10.PerformLayout()
         CType(dtgReadings, ComponentModel.ISupportInitialize).EndInit()
         Panel8.ResumeLayout(False)
         ResumeLayout(False)
@@ -1069,4 +1207,16 @@ Partial Class frmMain
     Friend WithEvents Label4 As Label
     Friend WithEvents lblindicator As Label
     Friend WithEvents PermittedWeightPerAxleToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents chkenableSaveandPrint As CheckBox
+    Friend WithEvents ProgramToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents NewEntryToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
+    Friend WithEvents ToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator4 As ToolStripSeparator
+    Friend WithEvents DeleteToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator5 As ToolStripSeparator
+    Friend WithEvents ToolStripSeparator6 As ToolStripSeparator
+    Friend WithEvents SerialNumberToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CalibrationNumberToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ExitToolStripMenuItem As ToolStripMenuItem
 End Class

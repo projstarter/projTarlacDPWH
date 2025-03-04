@@ -137,6 +137,30 @@ Namespace My
                 Me("permittedweightperaxle") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("unknown")>  _
+        Public Property serialnumber() As String
+            Get
+                Return CType(Me("serialnumber"),String)
+            End Get
+            Set
+                Me("serialnumber") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("unknown")>  _
+        Public Property calibrationnumber() As String
+            Get
+                Return CType(Me("calibrationnumber"),String)
+            End Get
+            Set
+                Me("calibrationnumber") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

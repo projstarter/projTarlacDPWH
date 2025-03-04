@@ -37,7 +37,7 @@ Public Class frmMain
             End If
 
             ' Add the max reading to the list if the condition is met
-            If reading < 10 And maxReading <> 0 And NoOfAxlePerCode > 0 Then
+            If reading < 10 And maxReading > 500 And NoOfAxlePerCode > 0 Then
                 maxReadings.Add(maxReading)
                 If maxReadings.Count <= NoOfAxlePerCode And Not (OnEdit) Then
                     finalReadings.Add(maxReading)
@@ -106,7 +106,12 @@ Public Class frmMain
 
     Private Async Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         PermittedWeightPerAxleToolStripMenuItem.Text = $"Permitted Weight per Axle ({My.Settings.permittedweightperaxle} kg)"
+        SerialNumberToolStripMenuItem.Text = $"Serial Number [{My.Settings.serialnumber}]"
+        CalibrationNumberToolStripMenuItem.Text = $"Calibration Number [{My.Settings.calibrationnumber}]"
+
         PermittedWeightperAxle = My.Settings.permittedweightperaxle
+
+
         lblPortStatus.Text = $"Port Status : {IIf((serialPort.IsOpen), "Open", "Error")}"
         lblUser.Text = $"Current User : {thisUser.Username} ({thisUser.UserFunction})"
         lblmode.Text = $"W-Mode : {My.Settings.w_mode}"
@@ -124,7 +129,11 @@ Public Class frmMain
             lblindicator.Visible = True
             StaticBoard()
             If (wMode = "STATIC") Then
-                Save()
+                If (chkenableSaveandPrint.Checked) Then
+                    Call btnsaveandprint_Click(sender, e)
+                Else
+                    Call btnsave_Click(sender, e)
+                End If
             Else
                 statusMessage = "Transaction is now ready to be saved. Please complete... "
             End If
@@ -169,6 +178,7 @@ Public Class frmMain
 
     Private Sub btnsave_Click(sender As Object, e As EventArgs) Handles btnsave.Click
         Save()
+        LoadList()
     End Sub
 
     Private Sub Save()
@@ -178,8 +188,8 @@ Public Class frmMain
 
         If Not (OnEdit) Then
             Try
-                d.Exec($"INSERT INTO tbltransaction (noofaxle, sn,code,drivername,plateno)
-                    VALUES({NoOfAxlePerCode},'{txtsn.Text}','{cbocode.Text}','{txtdrivername.Text}','{txtplateno.Text}')")
+                d.Exec($"INSERT INTO tbltransaction (noofaxle, sn,code,drivername,plateno,operator)
+                    VALUES({NoOfAxlePerCode},'{txtsn.Text}','{cbocode.Text}','{txtdrivername.Text}','{txtplateno.Text}','{thisUser.FullName}')")
             Catch ex As Exception
                 MessageBox.Show(ex.Message, "Error on saving the transaction.", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
@@ -189,6 +199,7 @@ Public Class frmMain
                     code = '{cbocode.Text}',
                     drivername = '{txtdrivername.Text}',
                     plateno = '{txtplateno.Text}',
+                    operator = '{thisUser.FullName}',
                     noofaxle = {NoOfAxlePerCode}
                     WHERE sn = '{txtsn.Text}'")
             Catch ex As Exception
@@ -201,7 +212,6 @@ Public Class frmMain
                     VALUES('{txtsn.Text}','{dtgReadings.Rows(i).Cells(0).Value}','{dtgReadings.Rows(i).Cells(1).Value}')")
         Next
         statusMessage = "Transaction successfully completed!"
-
         Clear()
         LoadList()
     End Sub
@@ -209,9 +219,9 @@ Public Class frmMain
     Sub AddVehicleWeightBreakdown(TotalWeight As Integer)
         Dim ExcessWeight As Integer = TotalWeight - Val(txtmaxweight.Text)
         dtgReadings.Rows.Add()
-        dtgReadings.Rows.Add($"Total Weight", $"{TotalWeight} kg", "")
-        dtgReadings.Rows.Add($"Permitted Weight", $"{Val(txtmaxweight.Text)} kg", "")
-        dtgReadings.Rows.Add($"EXCESS WEIGHT", $"{IIf(ExcessWeight > 0, $"{ExcessWeight} kg", "None")}", "Capture")
+        dtgReadings.Rows.Add($"Total Wgt", $"{TotalWeight} kg", "")
+        dtgReadings.Rows.Add($"Permitted Wgt", $"{Val(txtmaxweight.Text)} kg", "")
+        dtgReadings.Rows.Add($"EXCESS Wgt", $"{IIf(ExcessWeight > 0, $"{ExcessWeight} kg", "None")}", "Capture")
         dtgReadings.Rows.Add()
     End Sub
     Public Sub StaticBoard()
@@ -234,9 +244,9 @@ Public Class frmMain
                 statusMessage = "Loading captured reading/s..."
                 AxelWeight = Val(finalReadings(i - 1).ToString)
                 ExcessWeight = AxelWeight - PermittedWeightperAxle
-                dtgReadings.Rows.Add($"Axle {i} Weight", $"{AxelWeight} kg", "Capture")
-                dtgReadings.Rows.Add($"Permitted Weight", $"{PermittedWeightperAxle} kg", "Capture")
-                dtgReadings.Rows.Add($"EXCESS WEIGHT", $"{IIf(ExcessWeight > 0, $"{ExcessWeight} kg", "None")}", "Capture")
+                dtgReadings.Rows.Add($"Axle {i} Wgt", $"{AxelWeight} kg", "Capture")
+                dtgReadings.Rows.Add($"Permitted Wgt", $"{PermittedWeightperAxle} kg", "Capture")
+                dtgReadings.Rows.Add($"EXCESS Wgt", $"{IIf(ExcessWeight > 0, $"{ExcessWeight} kg", "None")}", "Capture")
                 dtgReadings.Rows.Add()
             Next
 
@@ -284,6 +294,7 @@ Public Class frmMain
         statusMessage = "Preparing fields for new entries..."
 
         OnEdit = False
+        cbocode.Enabled = True
         NoOfAxlePerCode = 0
         txtsn.Text = GetLatestTicketNo()
         txtcodedescription.Text = ""
@@ -293,8 +304,11 @@ Public Class frmMain
         dtgReadings.Rows.Clear()
         txtmaxweight.Text = ""
         TransactionCompleted = False
+
+        scaleReadings.Clear()
         maxReadings.Clear()
         finalReadings.Clear()
+
         cbocode.Focus()
 
         lblindicator.Visible = False
@@ -321,7 +335,8 @@ Public Class frmMain
         serialPort = portManager.Connect(My.Settings.portname)
     End Sub
 
-    Private Sub txtsearch_TextChanged(sender As Object, e As EventArgs) Handles ToolStripButton1.Click, txtsearch.TextChanged, dtpfrom.ValueChanged, dtpto.ValueChanged
+    Private Sub txtsearch_TextChanged(sender As Object, e As EventArgs) Handles ToolStripButton1.Click, txtsearch.TextChanged, dtpfrom.ValueChanged, dtpto.ValueChanged,
+            ToolStripMenuItem1.Click
         LoadList()
     End Sub
 
@@ -356,11 +371,12 @@ Public Class frmMain
     End Sub
 
     Private Sub btnprint_Click(sender As Object, e As EventArgs) Handles btnprint.Click
-        Dim p As New PrintManager
-        p.Print(txtsn.Text)
+        If (txtsn.Text.Trim <> "") Then
+            Print(txtsn.Text)
+        End If
     End Sub
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click, NewEntryToolStripMenuItem.Click
         Clear()
     End Sub
 
@@ -395,5 +411,54 @@ Public Class frmMain
             userInput = portManager.GetScaleReadingRemovingNonNumericValue(userInput)
         End While
         My.Settings.permittedweightperaxle = Val(userInput)
+    End Sub
+
+    Private Sub btnsaveandprint_Click(sender As Object, e As EventArgs) Handles btnsaveandprint.Click
+        Dim sn As String = txtsn.Text
+        Save()
+        Print(sn)
+        LoadList()
+    End Sub
+
+    Private Sub Print(sn As String)
+        Dim p As New PrintManager
+        p.Print(sn)
+    End Sub
+
+    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
+
+    End Sub
+
+    Private Sub SerialNumberToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SerialNumberToolStripMenuItem.Click
+        Dim userInput As String = ""
+        userInput = InputBox("Please set a valid ""Serial Number"" value:", "Serial Number", My.Settings.serialnumber)
+        ' Check if the user canceled or entered an empty value
+        If userInput Is vbNullString Then
+            userInput = My.Settings.serialnumber
+        End If
+        My.Settings.serialnumber = userInput
+    End Sub
+
+    Private Sub CalibrationNumberToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CalibrationNumberToolStripMenuItem.Click
+        Dim userInput As String = ""
+        userInput = InputBox("Please set a valid ""Calibration Number"" value:", "Calibration Number", My.Settings.calibrationnumber)
+        ' Check if the user canceled or entered an empty value
+        If userInput Is vbNullString Then
+            userInput = My.Settings.calibrationnumber
+        End If
+        My.Settings.calibrationnumber = userInput
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+        Dim selection As String = $"SELECT * FROM tbltransaction WHERE (sn LIKE '%{txtsearch.Text}%' OR drivername LIKE '%{txtsearch.Text}%' OR plateno LIKE '%{txtsearch.Text}%') AND (DATE([DATE]) BETWEEN '{dtpfrom.Value.ToString("yyyy-MM-dd")}' AND '{dtpto.Value.ToString("yyyy-MM-dd")}') ORDER BY id DESC"
+        Dim export As New ExcelManager
+        export.ExportToExcel(selection)
+
+
+    End Sub
+
+    Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
+        Me.Close()
     End Sub
 End Class

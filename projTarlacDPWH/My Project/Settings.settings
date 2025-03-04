@@ -23,5 +23,11 @@
     <Setting Name="permittedweightperaxle" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">13500</Value>
     </Setting>
+    <Setting Name="serialnumber" Type="System.String" Scope="User">
+      <Value Profile="(Default)">unknown</Value>
+    </Setting>
+    <Setting Name="calibrationnumber" Type="System.String" Scope="User">
+      <Value Profile="(Default)">unknown</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
