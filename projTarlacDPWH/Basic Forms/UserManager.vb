@@ -26,7 +26,7 @@
                         )
             Else
                 d.Exec($"INSERT INTO tbluser (firstname, lastname, username, password, role, isactive) 
-                         VALUES ('{txtfirstname.Text}','{txtlastname.Text}', '{txtusername.Text}', '{txtpassword.Text}','{cborole.Text}',{ConvertBooleantoInt((chkactive.Checked))})"
+                         VALUES ('{txtfirstname.Text}','{txtlastname.Text}', '{txtusername.Text}',  '{TextEncode(FixApostrophe(txtpassword.Text))}','{cborole.Text}',{ConvertBooleantoInt((chkactive.Checked))})"
                         )
             End If
             OperationCompleted()

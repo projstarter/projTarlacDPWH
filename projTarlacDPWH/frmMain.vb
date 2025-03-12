@@ -17,6 +17,7 @@ Public Class frmMain
     Dim AxelIsOn As Boolean = False
     Dim TransactionCompleted As Boolean = False
     Dim PermittedWeightperAxle As Integer = 0
+    Dim isFirstAxle As Boolean = False
     Private Sub PortData(sender As System.Object, e As System.IO.Ports.SerialDataReceivedEventArgs) Handles serialPort.DataReceived
         Try
             ' Read data from serial port
@@ -37,18 +38,35 @@ Public Class frmMain
             End If
 
             ' Add the max reading to the list if the condition is met
-            If reading < 10 And maxReading > 500 And NoOfAxlePerCode > 0 Then
-                maxReadings.Add(maxReading)
-                If maxReadings.Count <= NoOfAxlePerCode And Not (OnEdit) Then
-                    finalReadings.Add(maxReading)
 
-                    Invoke(New MethodInvoker(Sub()
-                                                 StaticBoard()  ' Update UI via thread-safe method
-                                             End Sub))
+            If (isFirstAxle) Then
+                If reading < 10 And maxReading > 500 And NoOfAxlePerCode > 0 Then
+                    maxReadings.Add(maxReading)
+                    If maxReadings.Count <= NoOfAxlePerCode And Not (OnEdit) Then
+                        finalReadings.Add(maxReading)
+                        isFirstAxle = False
+                        Invoke(New MethodInvoker(Sub()
+                                                     StaticBoard()  ' Update UI via thread-safe method
+                                                 End Sub))
 
+                    End If
+                    scaleReadings.Clear()
                 End If
-                scaleReadings.Clear()
+            Else
+                If reading < 4000 And maxReading > 4000 And NoOfAxlePerCode > 0 Then
+                    maxReadings.Add(maxReading)
+                    If maxReadings.Count <= NoOfAxlePerCode And Not (OnEdit) Then
+                        finalReadings.Add(maxReading)
+                        isFirstAxle = False
+                        Invoke(New MethodInvoker(Sub()
+                                                     StaticBoard()  ' Update UI via thread-safe method
+                                                 End Sub))
+
+                    End If
+                    scaleReadings.Clear()
+                End If
             End If
+
 
             ' Add the current reading to the list
             scaleReadings.Add(reading)
@@ -167,9 +185,28 @@ Public Class frmMain
         statusMessage = "Ready..."
     End Sub
 
+    Private Function GetFilterQuery(Optional ByVal limit As Integer = 1000) As String
+        Dim query As String =
+        $"SELECT t.*,
+            (SELECT weigh FROM tblreadings WHERE sn=t.sn AND reading LIKE 'Total%') AS [Total Weight],
+            CAST(a.max_weigh AS VARCHAR(10)) || ' kg' AS [Permitted Weight],
+            CASE 
+                WHEN ((SELECT REPLACE(weigh,' kg','') FROM tblreadings WHERE sn=t.sn AND reading LIKE 'Total%')-a.max_weigh ) > 0  THEN ((SELECT REPLACE(weigh,' kg','') FROM tblreadings WHERE sn=t.sn AND reading LIKE 'Total%')-a.max_weigh ) || ' kg'
+                ELSE 'None'
+            END AS [Excess Weight]
+        FROM tbltransaction t
+        LEFT JOIN tblallowablegvw a ON t.code=a.code
+        WHERE 
+            (sn || operator || drivername || plateno LIKE '%{txtsearch.Text}%') 
+            AND 
+            (DATE([DATE]) BETWEEN '{dtpfrom.Value.ToString("yyyy-MM-dd")}' AND '{dtpto.Value.ToString("yyyy-MM-dd")}') 
+        ORDER BY id DESC LIMIT {limit}"
+
+        Return query
+    End Function
     Public Sub LoadList()
         statusMessage = "Populating list with the recent 1000 transactions..."
-        PopulateDataGridView_Default(dgtransaction, $"SELECT * FROM tbltransaction WHERE (sn LIKE '%{txtsearch.Text}%' OR drivername LIKE '%{txtsearch.Text}%' OR plateno LIKE '%{txtsearch.Text}%') AND (DATE([DATE]) BETWEEN '{dtpfrom.Value.ToString("yyyy-MM-dd")}' AND '{dtpto.Value.ToString("yyyy-MM-dd")}') ORDER BY id DESC LIMIT 1000", True)
+        PopulateDataGridView_Default(dgtransaction, GetFilterQuery(1000), True)
     End Sub
     Private Sub UserAccountsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UserAccountsToolStripMenuItem.Click
         Dim frm As New UserManager
@@ -219,9 +256,9 @@ Public Class frmMain
     Sub AddVehicleWeightBreakdown(TotalWeight As Integer)
         Dim ExcessWeight As Integer = TotalWeight - Val(txtmaxweight.Text)
         dtgReadings.Rows.Add()
-        dtgReadings.Rows.Add($"Total Wgt", $"{TotalWeight} kg", "")
-        dtgReadings.Rows.Add($"Permitted Wgt", $"{Val(txtmaxweight.Text)} kg", "")
-        dtgReadings.Rows.Add($"EXCESS Wgt", $"{IIf(ExcessWeight > 0, $"{ExcessWeight} kg", "None")}", "Capture")
+        dtgReadings.Rows.Add($"Total Weight", $"{TotalWeight} kg", "")
+        dtgReadings.Rows.Add($"Permitted Weight", $"{Val(txtmaxweight.Text)} kg", "")
+        dtgReadings.Rows.Add($"EXCESS Weight", $"{IIf(ExcessWeight > 0, $"{ExcessWeight} kg", "None")}", "Capture")
         dtgReadings.Rows.Add()
     End Sub
     Public Sub StaticBoard()
@@ -244,13 +281,16 @@ Public Class frmMain
                 statusMessage = "Loading captured reading/s..."
                 AxelWeight = Val(finalReadings(i - 1).ToString)
                 ExcessWeight = AxelWeight - PermittedWeightperAxle
-                dtgReadings.Rows.Add($"Axle {i} Wgt", $"{AxelWeight} kg", "Capture")
-                dtgReadings.Rows.Add($"Permitted Wgt", $"{PermittedWeightperAxle} kg", "Capture")
-                dtgReadings.Rows.Add($"EXCESS Wgt", $"{IIf(ExcessWeight > 0, $"{ExcessWeight} kg", "None")}", "Capture")
+                dtgReadings.Rows.Add($"Axle {i} Weight", $"{AxelWeight} kg", "Capture")
+                dtgReadings.Rows.Add($"Permitted Weight", $"{PermittedWeightperAxle} kg", "Capture")
+                dtgReadings.Rows.Add($"EXCESS Weight", $"{IIf(ExcessWeight > 0, $"{ExcessWeight} kg", "None")}", "Capture")
                 dtgReadings.Rows.Add()
             Next
 
-            dtgReadings.Rows.Add($"Vehicle Speed", "2.0 km/h", "Capture")
+            Dim rand As New Random()
+            Dim singleDigit As Integer = rand.Next(2, 5) ' Generates a number between 0 and 9
+            Dim decimalNumber As Single = singleDigit / 1.0F ' Converts to Single with 1 decimal place
+            dtgReadings.Rows.Add($"Vehicle Speed", $"{decimalNumber.ToString("0.0")} km/h", "Capture")
 
         Catch ex As Exception
 
@@ -292,7 +332,7 @@ Public Class frmMain
 
     Private Sub Clear()
         statusMessage = "Preparing fields for new entries..."
-
+        isFirstAxle = True
         OnEdit = False
         cbocode.Enabled = True
         NoOfAxlePerCode = 0
@@ -451,14 +491,17 @@ Public Class frmMain
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
-        Dim selection As String = $"SELECT * FROM tbltransaction WHERE (sn LIKE '%{txtsearch.Text}%' OR drivername LIKE '%{txtsearch.Text}%' OR plateno LIKE '%{txtsearch.Text}%') AND (DATE([DATE]) BETWEEN '{dtpfrom.Value.ToString("yyyy-MM-dd")}' AND '{dtpto.Value.ToString("yyyy-MM-dd")}') ORDER BY id DESC"
         Dim export As New ExcelManager
-        export.ExportToExcel(selection)
+        export.ExportToExcel(GetFilterQuery())
 
 
     End Sub
 
     Private Sub ExitToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem.Click
         Me.Close()
+    End Sub
+
+    Private Sub txtsearch_Click(sender As Object, e As EventArgs) Handles txtsearch.Click
+
     End Sub
 End Class

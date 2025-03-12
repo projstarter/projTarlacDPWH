@@ -33,6 +33,7 @@ Partial Class frmMain
         ToolStripSeparator4 = New ToolStripSeparator()
         DeleteToolStripMenuItem = New ToolStripMenuItem()
         ToolStripSeparator5 = New ToolStripSeparator()
+        ExitToolStripMenuItem = New ToolStripMenuItem()
         InfoToolStripMenuItem = New ToolStripMenuItem()
         ProgramToolStripMenuItem = New ToolStripMenuItem()
         ToolStripSeparator1 = New ToolStripSeparator()
@@ -110,7 +111,6 @@ Partial Class frmMain
         lblreading = New Label()
         Timer1 = New Timer(components)
         SIMULATION = New Timer(components)
-        ExitToolStripMenuItem = New ToolStripMenuItem()
         MenuStrip1.SuspendLayout()
         StatusStrip1.SuspendLayout()
         Panel1.SuspendLayout()
@@ -154,39 +154,45 @@ Partial Class frmMain
         NewEntryToolStripMenuItem.Image = CType(resources.GetObject("NewEntryToolStripMenuItem.Image"), Image)
         NewEntryToolStripMenuItem.Name = "NewEntryToolStripMenuItem"
         NewEntryToolStripMenuItem.ShortcutKeys = Keys.F3
-        NewEntryToolStripMenuItem.Size = New Size(188, 30)
+        NewEntryToolStripMenuItem.Size = New Size(160, 30)
         NewEntryToolStripMenuItem.Text = "New Entry"
         ' 
         ' ToolStripSeparator3
         ' 
         ToolStripSeparator3.Name = "ToolStripSeparator3"
-        ToolStripSeparator3.Size = New Size(185, 6)
+        ToolStripSeparator3.Size = New Size(157, 6)
         ' 
         ' ToolStripMenuItem1
         ' 
         ToolStripMenuItem1.Image = CType(resources.GetObject("ToolStripMenuItem1.Image"), Image)
         ToolStripMenuItem1.Name = "ToolStripMenuItem1"
         ToolStripMenuItem1.ShortcutKeys = Keys.F5
-        ToolStripMenuItem1.Size = New Size(188, 30)
+        ToolStripMenuItem1.Size = New Size(160, 30)
         ToolStripMenuItem1.Text = "Refresh"
         ' 
         ' ToolStripSeparator4
         ' 
         ToolStripSeparator4.Name = "ToolStripSeparator4"
-        ToolStripSeparator4.Size = New Size(185, 6)
+        ToolStripSeparator4.Size = New Size(157, 6)
         ' 
         ' DeleteToolStripMenuItem
         ' 
         DeleteToolStripMenuItem.Image = CType(resources.GetObject("DeleteToolStripMenuItem.Image"), Image)
         DeleteToolStripMenuItem.Name = "DeleteToolStripMenuItem"
         DeleteToolStripMenuItem.ShortcutKeys = Keys.Delete
-        DeleteToolStripMenuItem.Size = New Size(188, 30)
+        DeleteToolStripMenuItem.Size = New Size(160, 30)
         DeleteToolStripMenuItem.Text = "Delete"
         ' 
         ' ToolStripSeparator5
         ' 
         ToolStripSeparator5.Name = "ToolStripSeparator5"
-        ToolStripSeparator5.Size = New Size(185, 6)
+        ToolStripSeparator5.Size = New Size(157, 6)
+        ' 
+        ' ExitToolStripMenuItem
+        ' 
+        ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
+        ExitToolStripMenuItem.Size = New Size(160, 30)
+        ExitToolStripMenuItem.Text = "Exit"
         ' 
         ' InfoToolStripMenuItem
         ' 
@@ -1081,12 +1087,6 @@ Partial Class frmMain
         ' SIMULATION
         ' 
         SIMULATION.Interval = 1000
-        ' 
-        ' ExitToolStripMenuItem
-        ' 
-        ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        ExitToolStripMenuItem.Size = New Size(188, 30)
-        ExitToolStripMenuItem.Text = "Exit"
         ' 
         ' frmMain
         ' 
